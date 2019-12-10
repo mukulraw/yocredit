@@ -71,6 +71,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:hint="tap to enter"
+                android:id="@+id/dob"
+                android:clickable="false"
+                android:focusable="false"
                 android:padding="10dp"
                 android:inputType="textPersonName"
                 android:background="@drawable/blue_stroke_round"
@@ -92,6 +95,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:hint="tap to enter"
+                android:id="@+id/father"
                 android:padding="10dp"
                 android:inputType="textPersonName"
                 android:background="@drawable/blue_stroke_round"
@@ -112,6 +116,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:hint="tap to enter"
+                android:id="@+id/mother"
                 android:padding="10dp"
                 android:inputType="textPersonName"
                 android:background="@drawable/blue_stroke_round"
@@ -135,6 +140,8 @@
                 android:layout_marginEnd="8dp"
                 android:hint="tap to enter"
                 android:lines="2"
+                android:id="@+id/address"
+                android:inputType="textPostalAddress"
                 android:padding="10dp"
                 android:gravity="start"
                 android:background="@drawable/blue_stroke_round"
@@ -157,6 +164,7 @@
                 android:layout_marginEnd="8dp"
                 android:hint="tap to enter"
                 android:padding="10dp"
+                android:id="@+id/income"
                 android:inputType="textPersonName"
                 android:background="@drawable/blue_stroke_round"
                 />
@@ -166,7 +174,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="REFERENCE 1 *"
+                android:text="REFERENCE 1"
                 android:textColor="#000000"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="8dp"
@@ -180,6 +188,7 @@
                 android:layout_marginEnd="8dp"
                 android:hint="tap to enter"
                 android:padding="10dp"
+                android:id="@+id/reference1"
                 android:inputType="textPersonName"
                 android:background="@drawable/blue_stroke_round"
                 />
@@ -187,7 +196,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="REFERENCE 2 *"
+                android:text="REFERENCE 2"
                 android:textColor="#000000"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="8dp"
@@ -201,6 +210,7 @@
                 android:layout_marginEnd="8dp"
                 android:hint="tap to enter"
                 android:padding="10dp"
+                android:id="@+id/reference2"
                 android:inputType="textPersonName"
                 android:background="@drawable/blue_stroke_round"
                 />
@@ -229,4 +239,17 @@
 
 
     </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

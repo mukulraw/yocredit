@@ -63,6 +63,8 @@
                 android:layout_marginTop="32dp"
                 android:text="1. Provide Basic Details"
                 android:textSize="18sp"
+                android:drawablePadding="10dp"
+                android:drawableEnd="@drawable/ic_checked"
                 android:textColor="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -85,6 +87,7 @@
                 android:layout_marginTop="8dp"
                 android:textColor="@color/colorPrimary"
                 android:text="2. Provide Personal Details"
+                android:drawablePadding="10dp"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView3" />
@@ -107,6 +110,7 @@
                 android:layout_marginTop="8dp"
                 android:textSize="18sp"
                 android:text="3. Documents Upload"
+                android:drawablePadding="10dp"
                 android:textColor="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView4" />
@@ -131,6 +135,7 @@
                 android:text="Verification from our end"
                 android:textSize="18sp"
                 android:textColor="@color/colorPrimary"
+                android:drawablePadding="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView5" />

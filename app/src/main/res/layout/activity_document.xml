@@ -56,6 +56,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/clipboard"
+                android:id="@+id/pan_pic"
                 android:layout_gravity="center_vertical"
                 />
 
@@ -64,6 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UPLOAD"
+                android:id="@+id/upload1"
                 android:layout_marginStart="30dp"
                 android:layout_gravity="center_vertical"
                 />
@@ -93,6 +95,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/clipboard"
+                android:id="@+id/afpic"
                 android:layout_gravity="center_vertical"
                 />
 
@@ -101,6 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UPLOAD"
+                android:id="@+id/upload2"
                 android:layout_marginStart="30dp"
                 android:layout_gravity="center_vertical"
                 />
@@ -130,6 +134,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/clipboard"
+                android:id="@+id/abpic"
                 android:layout_gravity="center_vertical"
                 />
 
@@ -138,6 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UPLOAD"
+                android:id="@+id/upload3"
                 android:layout_marginStart="30dp"
                 android:layout_gravity="center_vertical"
                 />
@@ -166,6 +172,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/clipboard"
+                android:id="@+id/ccpic"
                 android:layout_gravity="center_vertical"
                 />
 
@@ -174,6 +181,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UPLOAD"
+                android:id="@+id/upload4"
                 android:layout_marginStart="30dp"
                 android:layout_gravity="center_vertical"
                 />
@@ -196,6 +204,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:hint="tap to enter"
+            android:id="@+id/amount"
             android:padding="10dp"
             android:inputType="textPersonName"
             android:background="@drawable/blue_stroke_round"
@@ -217,6 +226,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:hint="tap to enter"
+            android:id="@+id/tenover"
             android:padding="10dp"
             android:inputType="textPersonName"
             android:background="@drawable/blue_stroke_round"
@@ -246,4 +256,17 @@
 
 
     </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
