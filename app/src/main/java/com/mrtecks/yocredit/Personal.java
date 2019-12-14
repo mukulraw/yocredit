@@ -152,7 +152,7 @@ public class Personal extends AppCompatActivity {
                                                     SharePreferenceUtils.getInstance().saveString("father" , item.getFather());
                                                     SharePreferenceUtils.getInstance().saveString("mother" , item.getMother());
                                                     SharePreferenceUtils.getInstance().saveString("address" , item.getAddress());
-                                                    SharePreferenceUtils.getInstance().saveString("income" , item.getIncome());
+
                                                     SharePreferenceUtils.getInstance().saveString("reference1" , item.getReference1());
                                                     SharePreferenceUtils.getInstance().saveString("reference2" , item.getReference2());
                                                     Toast.makeText(Personal.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();

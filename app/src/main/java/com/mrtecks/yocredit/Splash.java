@@ -93,6 +93,7 @@ public class Splash extends AppCompatActivity {
     void startApp()
     {
         final String id = SharePreferenceUtils.getInstance().getString("id");
+        final String pan = SharePreferenceUtils.getInstance().getString("income");
 
         t = new Timer();
         t.schedule(new TimerTask() {
@@ -101,9 +102,20 @@ public class Splash extends AppCompatActivity {
 
                 if (id.length() > 0)
                 {
-                    Intent intent = new Intent(Splash.this , Steps.class);
-                    startActivity(intent);
-                    finishAffinity();
+                    if (pan.length() > 0)
+                    {
+                        Intent intent = new Intent(Splash.this , MainActivity.class);
+                        startActivity(intent);
+                        finishAffinity();
+                    }
+                    else
+                    {
+                        Intent intent = new Intent(Splash.this , Steps.class);
+                        startActivity(intent);
+                        finishAffinity();
+                    }
+
+
                 }
                 else
                 {

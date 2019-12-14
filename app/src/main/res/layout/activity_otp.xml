@@ -7,22 +7,28 @@
     android:background="#efefef"
     tools:context=".Login">
 
-    <TextView
-        android:id="@+id/textView3"
+    <ImageView
+        android:id="@+id/imageView6"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/back4" />
 
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:adjustViewBounds="true"
+        android:background="@drawable/white_back_round"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,6 +44,7 @@
         android:text="VERIFY OTP TO CONTINUE"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
@@ -49,6 +56,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="ENTER OTP"
+        android:textColor="#ffffff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -98,7 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="RESEND"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/button" />

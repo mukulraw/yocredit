@@ -45,7 +45,6 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class Document extends AppCompatActivity {
     Button submit;
 
-    EditText amount , tenover;
     CircleImageView panpic , afpic , abpic , ccpic;
     Button upload1 , upload2 , upload3 , upload4;
     ProgressBar progress;
@@ -60,8 +59,7 @@ public class Document extends AppCompatActivity {
 
         submit = findViewById(R.id.submit);
         progress = findViewById(R.id.progressBar);
-        amount = findViewById(R.id.amount);
-        tenover = findViewById(R.id.tenover);
+
         panpic = findViewById(R.id.pan_pic);
         afpic = findViewById(R.id.afpic);
         abpic = findViewById(R.id.abpic);
@@ -71,16 +69,7 @@ public class Document extends AppCompatActivity {
         upload3 = findViewById(R.id.upload3);
         upload4 = findViewById(R.id.upload4);
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent(Document.this , Status.class);
-                startActivity(intent);
-                finishAffinity();
-
-            }
-        });
 
 
         upload1.setOnClickListener(new View.OnClickListener() {
@@ -302,8 +291,6 @@ public class Document extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String a = amount.getText().toString();
-                String t = tenover.getText().toString();
 
                 if (uri1 != null)
                 {
@@ -313,127 +300,112 @@ public class Document extends AppCompatActivity {
                         {
                             if (uri4 != null)
                             {
-                                if (a.length() > 0)
-                                {
-                                    if (t.length() > 0)
-                                    {
+
+                                MultipartBody.Part body1 = null;
+
+                                try {
+
+                                    RequestBody reqFile1 = RequestBody.create(MediaType.parse("multipart/form-data"), f1);
+                                    body1 = MultipartBody.Part.createFormData("pan", f1.getName(), reqFile1);
 
 
-                                        MultipartBody.Part body1 = null;
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
 
-                                        try {
+                                MultipartBody.Part body2 = null;
 
-                                            RequestBody reqFile1 = RequestBody.create(MediaType.parse("multipart/form-data"), f1);
-                                            body1 = MultipartBody.Part.createFormData("pan", f1.getName(), reqFile1);
+                                try {
+
+                                    RequestBody reqFile2 = RequestBody.create(MediaType.parse("multipart/form-data"), f2);
+                                    body2 = MultipartBody.Part.createFormData("aadhar1", f2.getName(), reqFile2);
 
 
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                MultipartBody.Part body3 = null;
+
+                                try {
+
+                                    RequestBody reqFile3 = RequestBody.create(MediaType.parse("multipart/form-data"), f3);
+                                    body3 = MultipartBody.Part.createFormData("aadhar2", f3.getName(), reqFile3);
+
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                MultipartBody.Part body4 = null;
+
+                                try {
+
+                                    RequestBody reqFile4 = RequestBody.create(MediaType.parse("multipart/form-data"), f4);
+                                    body4 = MultipartBody.Part.createFormData("passbook", f4.getName(), reqFile4);
+
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                progress.setVisibility(View.VISIBLE);
+
+                                Bean b = (Bean) getApplicationContext();
+
+                                Retrofit retrofit = new Retrofit.Builder()
+                                        .baseUrl(b.baseurl)
+                                        .addConverterFactory(ScalarsConverterFactory.create())
+                                        .addConverterFactory(GsonConverterFactory.create())
+                                        .build();
+
+                                AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
+
+                                Call<updateBean> call = cr.update_document(
+                                        SharePreferenceUtils.getInstance().getString("id") ,
+                                        "",
+                                        "",
+                                        body1 ,
+                                        body2 ,
+                                        body3 ,
+                                        body4
+                                );
+
+                                call.enqueue(new Callback<updateBean>() {
+                                    @Override
+                                    public void onResponse(Call<updateBean> call, Response<updateBean> response) {
+
+                                        if (response.body().getStatus().equals("1"))
+                                        {
+                                            Data item = response.body().getData();
+                                            SharePreferenceUtils.getInstance().saveString("pan" , item.getPan());
+                                            SharePreferenceUtils.getInstance().saveString("aadhar1" , item.getAadhar1());
+                                            SharePreferenceUtils.getInstance().saveString("aadhar2" , item.getAadhar2());
+                                            SharePreferenceUtils.getInstance().saveString("passbook" , item.getPassbook());
+                                            SharePreferenceUtils.getInstance().saveString("amount" , item.getAmount());
+                                            SharePreferenceUtils.getInstance().saveString("tenover" , item.getTenover());
+                                            SharePreferenceUtils.getInstance().saveString("income" , item.getIncome());
+                                            Toast.makeText(Document.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                                            Intent intent = new Intent(Document.this , MainActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(Document.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                         }
 
-                                        MultipartBody.Part body2 = null;
-
-                                        try {
-
-                                            RequestBody reqFile2 = RequestBody.create(MediaType.parse("multipart/form-data"), f2);
-                                            body2 = MultipartBody.Part.createFormData("aadhar1", f2.getName(), reqFile2);
-
-
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-
-                                        MultipartBody.Part body3 = null;
-
-                                        try {
-
-                                            RequestBody reqFile3 = RequestBody.create(MediaType.parse("multipart/form-data"), f3);
-                                            body3 = MultipartBody.Part.createFormData("aadhar2", f3.getName(), reqFile3);
-
-
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-
-                                        MultipartBody.Part body4 = null;
-
-                                        try {
-
-                                            RequestBody reqFile4 = RequestBody.create(MediaType.parse("multipart/form-data"), f4);
-                                            body4 = MultipartBody.Part.createFormData("passbook", f4.getName(), reqFile4);
-
-
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-
-                                        progress.setVisibility(View.VISIBLE);
-
-                                        Bean b = (Bean) getApplicationContext();
-
-                                        Retrofit retrofit = new Retrofit.Builder()
-                                                .baseUrl(b.baseurl)
-                                                .addConverterFactory(ScalarsConverterFactory.create())
-                                                .addConverterFactory(GsonConverterFactory.create())
-                                                .build();
-
-                                        AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
-
-                                        Call<updateBean> call = cr.update_document(
-                                                SharePreferenceUtils.getInstance().getString("id") ,
-                                                a ,
-                                                t ,
-                                                body1 ,
-                                                body2 ,
-                                                body3 ,
-                                                body4
-                                        );
-
-                                        call.enqueue(new Callback<updateBean>() {
-                                            @Override
-                                            public void onResponse(Call<updateBean> call, Response<updateBean> response) {
-
-                                                if (response.body().getStatus().equals("1"))
-                                                {
-                                                    Data item = response.body().getData();
-                                                    SharePreferenceUtils.getInstance().saveString("pan" , item.getPan());
-                                                    SharePreferenceUtils.getInstance().saveString("aadhar1" , item.getAadhar1());
-                                                    SharePreferenceUtils.getInstance().saveString("aadhar2" , item.getAadhar2());
-                                                    SharePreferenceUtils.getInstance().saveString("passbook" , item.getPassbook());
-                                                    SharePreferenceUtils.getInstance().saveString("amount" , item.getAmount());
-                                                    SharePreferenceUtils.getInstance().saveString("tenover" , item.getTenover());
-                                                    Toast.makeText(Document.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
-                                                    Intent intent = new Intent(Document.this , Status.class);
-                                                    startActivity(intent);
-                                                    finish();
-                                                }
-                                                else
-                                                {
-                                                    Toast.makeText(Document.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                                }
-
-                                                progress.setVisibility(View.GONE);
-
-                                            }
-
-                                            @Override
-                                            public void onFailure(Call<updateBean> call, Throwable t) {
-                                                progress.setVisibility(View.GONE);
-                                            }
-                                        });
-
+                                        progress.setVisibility(View.GONE);
 
                                     }
-                                    else
-                                    {
-                                        Toast.makeText(Document.this, "Invalid tenover", Toast.LENGTH_SHORT).show();
+
+                                    @Override
+                                    public void onFailure(Call<updateBean> call, Throwable t) {
+                                        progress.setVisibility(View.GONE);
                                     }
-                                }
-                                else
-                                {
-                                    Toast.makeText(Document.this, "Invalid amount", Toast.LENGTH_SHORT).show();
-                                }
+                                });
+
                             }
                             else
                             {

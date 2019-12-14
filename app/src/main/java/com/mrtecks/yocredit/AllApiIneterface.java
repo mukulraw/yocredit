@@ -1,6 +1,7 @@
 package com.mrtecks.yocredit;
 
 
+import com.mrtecks.yocredit.statusPOJO.statusBean;
 import com.mrtecks.yocredit.updatePOJO.updateBean;
 
 import okhttp3.MultipartBody;
@@ -65,7 +66,7 @@ public interface AllApiIneterface {
 
     @Multipart
     @POST("yocredit/api/getStatus.php")
-    Call<updateBean> getStatus(
+    Call<statusBean> getStatus(
             @Part("user_id") String user_id
     );
 

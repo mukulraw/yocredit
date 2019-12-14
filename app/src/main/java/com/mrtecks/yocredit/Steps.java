@@ -64,9 +64,9 @@ public class Steps extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (SharePreferenceUtils.getInstance().getString("amount").length() > 0)
+                if (SharePreferenceUtils.getInstance().getString("pan").length() > 0)
                 {
-                    Intent intent = new Intent(Steps.this , Status.class);
+                    Intent intent = new Intent(Steps.this , MainActivity.class);
                     startActivity(intent);
                     finish();
                 }

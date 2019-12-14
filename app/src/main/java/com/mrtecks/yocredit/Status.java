@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.mrtecks.yocredit.statusPOJO.statusBean;
 import com.mrtecks.yocredit.updatePOJO.updateBean;
 
 import retrofit2.Call;
@@ -40,13 +41,13 @@ public class Status extends AppCompatActivity {
 
         AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
 
-        Call<updateBean> call = cr.getStatus(
+        Call<statusBean> call = cr.getStatus(
                 SharePreferenceUtils.getInstance().getString("id")
         );
 
-        call.enqueue(new Callback<updateBean>() {
+        call.enqueue(new Callback<statusBean>() {
             @Override
-            public void onResponse(Call<updateBean> call, Response<updateBean> response) {
+            public void onResponse(Call<statusBean> call, Response<statusBean> response) {
 
                 status.setText("STATUS: " + response.body().getMessage());
 
@@ -54,7 +55,7 @@ public class Status extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<updateBean> call, Throwable t) {
+            public void onFailure(Call<statusBean> call, Throwable t) {
                 progress.setVisibility(View.GONE);
             }
         });
