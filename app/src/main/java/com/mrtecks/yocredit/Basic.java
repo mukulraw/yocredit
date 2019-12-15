@@ -1,6 +1,7 @@
 package com.mrtecks.yocredit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 
 import android.content.ContentUris;
@@ -44,6 +45,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class Basic extends AppCompatActivity {
 
+    Toolbar toolbar;
     Button submit, upload;
     EditText name , pin;
     CircleImageView image;
@@ -62,6 +64,23 @@ public class Basic extends AppCompatActivity {
         pin = findViewById(R.id.pin);
         image = findViewById(R.id.pan_pic);
         progress = findViewById(R.id.progressBar);
+        toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+
+        toolbar.setNavigationIcon(R.drawable.arrowleft);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        toolbar.setTitle("Provide Basic Details");
+
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override

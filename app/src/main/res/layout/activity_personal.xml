@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/back4" />
+        app:srcCompat="@color/colorPrimary" />
 
 
     <androidx.appcompat.widget.Toolbar
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NAME *"
-                android:textColor="#ffffff"
+                android:textColor="@color/white2"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="8dp"
                 />
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="D.O.B. *"
-                android:textColor="#ffffff"
+                android:textColor="@color/white2"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="8dp"
                 />
@@ -97,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="FATHER'S NAME *"
-                android:textColor="#ffffff"
+                android:textColor="@color/white2"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="8dp"
                 />
@@ -118,7 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MOTHER'S NAME *"
-                android:textColor="#ffffff"
+                android:textColor="@color/white2"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="8dp"
                 />
@@ -141,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ADDRESS *"
-                android:textColor="#ffffff"
+                android:textColor="@color/white2"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="8dp"
                 />
@@ -165,7 +165,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="YOUR INCOME *"
-                android:textColor="#ffffff"
+                android:textColor="@color/white2"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="8dp"
                 />
@@ -189,7 +189,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="REFERENCE 1"
-                android:textColor="#ffffff"
+                android:textColor="@color/white2"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="8dp"
                 />
@@ -211,7 +211,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="REFERENCE 2"
-                android:textColor="#ffffff"
+                android:textColor="@color/white2"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="8dp"
                 />
@@ -245,7 +245,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 />
         </LinearLayout>
 

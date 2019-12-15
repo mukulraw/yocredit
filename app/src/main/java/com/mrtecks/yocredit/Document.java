@@ -1,6 +1,7 @@
 package com.mrtecks.yocredit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 
 import android.content.ContentUris;
@@ -44,7 +45,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class Document extends AppCompatActivity {
     Button submit;
-
+    Toolbar toolbar;
     CircleImageView panpic , afpic , abpic , ccpic;
     Button upload1 , upload2 , upload3 , upload4;
     ProgressBar progress;
@@ -68,7 +69,22 @@ public class Document extends AppCompatActivity {
         upload2 = findViewById(R.id.upload2);
         upload3 = findViewById(R.id.upload3);
         upload4 = findViewById(R.id.upload4);
+        toolbar = findViewById(R.id.toolbar);
 
+        setSupportActionBar(toolbar);
+
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+
+        toolbar.setNavigationIcon(R.drawable.arrowleft);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        toolbar.setTitle("Documents Upload");
 
 
 

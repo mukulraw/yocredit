@@ -1,6 +1,7 @@
 package com.mrtecks.yocredit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import com.mrtecks.yocredit.updatePOJO.updateBean;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,7 +30,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class Personal extends AppCompatActivity {
     Button submit;
-
+    Toolbar toolbar;
     EditText name , dob , father , mother , address , income , reference1 , reference2;
     ProgressBar progress;
 
@@ -47,6 +49,24 @@ public class Personal extends AppCompatActivity {
         reference1 = findViewById(R.id.reference1);
         reference2 = findViewById(R.id.reference2);
         progress = findViewById(R.id.progressBar);
+
+        toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+
+        toolbar.setNavigationIcon(R.drawable.arrowleft);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        toolbar.setTitle("Provide Personal Details");
+
 
         dob.setOnClickListener(new View.OnClickListener() {
             @Override
