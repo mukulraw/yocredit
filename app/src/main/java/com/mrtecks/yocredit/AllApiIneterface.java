@@ -70,4 +70,13 @@ public interface AllApiIneterface {
             @Part("user_id") String user_id
     );
 
+    @Multipart
+    @POST("yocredit/api/applyLoan.php")
+    Call<statusBean> applyLoan(
+            @Part("user_id") String user_id,
+            @Part("amount") String amount,
+            @Part("interest") String interest,
+            @Part("tenover") String tenover
+    );
+
 }
