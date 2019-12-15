@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.mrtecks.yocredit.updatePOJO.Data;
+import com.mrtecks.yocredit.updatePOJO.updateBean;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,20 +54,51 @@ public class OTP extends AppCompatActivity {
 
                     AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
 
-                    Call<loginBean> call = cr.verify(SharePreferenceUtils.getInstance().getString("phone") , o);
-                    call.enqueue(new Callback<loginBean>() {
+                    Call<updateBean> call = cr.verify(SharePreferenceUtils.getInstance().getString("phone") , o);
+                    call.enqueue(new Callback<updateBean>() {
                         @Override
-                        public void onResponse(Call<loginBean> call, Response<loginBean> response) {
+                        public void onResponse(Call<updateBean> call, Response<updateBean> response) {
 
                             if (response.body().getStatus().equals("1"))
                             {
 
-                                Intent intent = new Intent(OTP.this , Steps.class);
-                                startActivity(intent);
-                                finishAffinity();
+                                Data item = response.body().getData();
+                                SharePreferenceUtils.getInstance().saveString("phone" , item.getPhone());
+                                SharePreferenceUtils.getInstance().saveString("id" , item.getUserId());
+                                SharePreferenceUtils.getInstance().saveString("name" , item.getName());
+                                SharePreferenceUtils.getInstance().saveString("photo" , item.getPhoto());
+                                SharePreferenceUtils.getInstance().saveString("pin" , item.getPin());
+                                SharePreferenceUtils.getInstance().saveString("name" , item.getName());
+                                SharePreferenceUtils.getInstance().saveString("dob" , item.getDob());
+                                SharePreferenceUtils.getInstance().saveString("father" , item.getFather());
+                                SharePreferenceUtils.getInstance().saveString("mother" , item.getMother());
+                                SharePreferenceUtils.getInstance().saveString("address" , item.getAddress());
 
-                                SharePreferenceUtils.getInstance().saveString("phone" , response.body().getPhone());
-                                SharePreferenceUtils.getInstance().saveString("id" , response.body().getUserId());
+                                SharePreferenceUtils.getInstance().saveString("reference1" , item.getReference1());
+                                SharePreferenceUtils.getInstance().saveString("reference2" , item.getReference2());
+                                SharePreferenceUtils.getInstance().saveString("pan" , item.getPan());
+                                SharePreferenceUtils.getInstance().saveString("aadhar1" , item.getAadhar1());
+                                SharePreferenceUtils.getInstance().saveString("aadhar2" , item.getAadhar2());
+                                SharePreferenceUtils.getInstance().saveString("passbook" , item.getPassbook());
+                                SharePreferenceUtils.getInstance().saveString("amount" , item.getAmount());
+                                SharePreferenceUtils.getInstance().saveString("tenover" , item.getTenover());
+                                SharePreferenceUtils.getInstance().saveString("income" , item.getIncome());
+
+                                if (SharePreferenceUtils.getInstance().getString("pan").length() > 0)
+                                {
+                                    Intent intent = new Intent(OTP.this , MainActivity.class);
+                                    startActivity(intent);
+                                    finishAffinity();
+                                }
+                                else
+                                {
+                                    Intent intent = new Intent(OTP.this , Steps.class);
+                                    startActivity(intent);
+                                    finishAffinity();
+                                }
+
+
+
                                 Toast.makeText(OTP.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                             }
@@ -78,7 +112,7 @@ public class OTP extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<loginBean> call, Throwable t) {
+                        public void onFailure(Call<updateBean> call, Throwable t) {
                             progress.setVisibility(View.GONE);
                         }
                     });

@@ -6,10 +6,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.mrtecks.yocredit.statusPOJO.statusBean;
 
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView menu, notification;
     DrawerLayout drawer;
     ProgressBar progress;
+    TextView loans , profile , logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         notification = findViewById(R.id.imageButton);
         drawer = findViewById(R.id.drawer);
         progress = findViewById(R.id.progressBar);
+        loans = findViewById(R.id.loans);
+        profile = findViewById(R.id.profile);
+        logout = findViewById(R.id.logout);
 
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +51,40 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     drawer.openDrawer(GravityCompat.START);
                 }
+
+            }
+        });
+
+        loans.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this , Loans.class);
+                startActivity(intent);
+                drawer.closeDrawer(GravityCompat.START);
+
+            }
+        });
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this , Profile.class);
+                startActivity(intent);
+                drawer.closeDrawer(GravityCompat.START);
+
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SharePreferenceUtils.getInstance().deletePref();
+                Intent intent = new Intent(MainActivity.this , Splash.class);
+                startActivity(intent);
+                finishAffinity();
 
             }
         });
@@ -77,13 +117,19 @@ public class MainActivity extends AppCompatActivity {
 
                 if (response.body().getStatus().equals("1")) {
 
+                    FragmentManager fm = getSupportFragmentManager(); // or 'getSupportFragmentManager();'
+                    int count = fm.getBackStackEntryCount();
+                    for(int i = 0; i < count; ++i) {
+                        fm.popBackStack();
+                    }
+
                     if (response.body().getData().size() > 0) {
                         // loan applied
 
                         String status = response.body().getData().get(0).getStatus();
                         if (status.equals("pending")) {
                             // loan request pending
-                            FragmentManager fm = getSupportFragmentManager();
+
                             FragmentTransaction ft = fm.beginTransaction();
                             pending test = new pending();
                             Bundle b = new Bundle();
@@ -95,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                             ft.commit();
                         } else if (status.equals("rejected")) {
                             // loan request rejected
-                            FragmentManager fm = getSupportFragmentManager();
+
                             FragmentTransaction ft = fm.beginTransaction();
                             rejected test = new rejected();
                             Bundle b = new Bundle();
@@ -105,9 +151,23 @@ public class MainActivity extends AppCompatActivity {
                             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                             //ft.addToBackStack(null);
                             ft.commit();
-                        } else {
+                        }
+                        else if (status.equals("completed")) {
+                            // loan request rejected
+
+                            FragmentTransaction ft = fm.beginTransaction();
+                            completed test = new completed();
+                            Bundle b = new Bundle();
+                            b.putString("id" , response.body().getData().get(0).getId());
+                            test.setArguments(b);
+                            ft.replace(R.id.replace, test);
+                            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+                            //ft.addToBackStack(null);
+                            ft.commit();
+                        }
+                        else {
                             // loan request approved
-                            FragmentManager fm = getSupportFragmentManager();
+
                             FragmentTransaction ft = fm.beginTransaction();
                             approved test = new approved();
                             Bundle b = new Bundle();
@@ -121,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
                     } else {
                         // no loan applied
-                        FragmentManager fm = getSupportFragmentManager();
+
                         FragmentTransaction ft = fm.beginTransaction();
                         apply test = new apply();
                         ft.replace(R.id.replace, test);
@@ -133,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
 
                 } else {
                     // profile rejected
+
                 }
 
                 progress.setVisibility(View.GONE);

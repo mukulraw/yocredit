@@ -18,9 +18,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="LOAN APPLICATION #01"
             android:gravity="center"
             android:layout_marginStart="16dp"
+            android:id="@+id/title"
             android:textAllCaps="true"
             android:textSize="18sp"
             android:layout_marginTop="24dp"
@@ -30,9 +30,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="APPLICATION DATE - 15 DEC 2019"
             android:layout_gravity="start"
             android:textSize="12sp"
+            android:id="@+id/date"
             android:textColor="@color/colorPrimaryDark"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"

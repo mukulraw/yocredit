@@ -1,7 +1,5 @@
 package com.mrtecks.yocredit;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,15 +13,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.mrtecks.yocredit.loanDetailsPOJO.Data;
-import com.mrtecks.yocredit.loanDetailsPOJO.Emi;
 import com.mrtecks.yocredit.loanDetailsPOJO.loanDetailsBean;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,25 +28,21 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class approved extends Fragment {
+public class completed extends Fragment {
 
     TextView title , date;
     EditText amount , interest , tenure , pamount , paid;
-    RecyclerView emi;
     Button pay;
     ProgressBar progress;
     String id;
-    List<Emi> list;
-    EMIAdapter adapter;
-    GridLayoutManager manager;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.approved , container , false);
+        View view = inflater.inflate(R.layout.completed , container , false);
 
         id = getArguments().getString("id");
-        list = new ArrayList<>();
+
 
         title = view.findViewById(R.id.title);
         date = view.findViewById(R.id.date);
@@ -59,24 +51,20 @@ public class approved extends Fragment {
         tenure = view.findViewById(R.id.tenure);
         pamount = view.findViewById(R.id.pamount);
         paid = view.findViewById(R.id.paid);
-        emi = view.findViewById(R.id.emis);
         pay = view.findViewById(R.id.submit);
         progress = view.findViewById(R.id.progress);
-
-        adapter = new EMIAdapter(getActivity() , list);
-        manager = new GridLayoutManager(getActivity() , 1);
-
-        emi.setAdapter(adapter);
-        emi.setLayoutManager(manager);
-
 
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getContext() , PayEMI.class);
-                intent.putExtra("id" , id);
-                startActivity(intent);
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                apply test = new apply();
+                ft.replace(R.id.replace, test);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+                ft.addToBackStack(null);
+                ft.commit();
 
             }
         });
@@ -132,7 +120,7 @@ public class approved extends Fragment {
                     pamount.setText(String.valueOf(nam));
                     paid.setText(item.getPaid());
 
-                    adapter.setData(item.getEmi());
+
 
                 }
                 else
@@ -153,79 +141,6 @@ public class approved extends Fragment {
         });
 
 
-    }
-
-    class EMIAdapter extends RecyclerView.Adapter<EMIAdapter.ViewHolder>
-    {
-
-        List<Emi> list = new ArrayList<>();
-        Context context;
-
-        public EMIAdapter(Context context , List<Emi> list)
-        {
-            this.context = context;
-            this.list = list;
-        }
-
-        void setData(List<Emi> list)
-        {
-            this.list = list;
-            notifyDataSetChanged();
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.emi_list_model , parent , false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-            Emi item = list.get(position);
-
-
-            holder.amount.setText(item.getAmount());
-            holder.date.setText(item.getCreated());
-            holder.status.setText(item.getStatus());
-
-            if (item.getStatus().equals("pending"))
-            {
-                holder.status.setTextColor(getResources().getColor(R.color.colorAccent));
-            }
-            else if (item.getStatus().equals("approved"))
-            {
-                holder.status.setTextColor(getResources().getColor(R.color.color_green));
-            }
-            else
-            {
-                holder.status.setTextColor(getResources().getColor(R.color.red));
-            }
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return list.size();
-        }
-
-        class ViewHolder extends RecyclerView.ViewHolder
-        {
-
-            EditText amount , date;
-            TextView status;
-
-            public ViewHolder(@NonNull View itemView) {
-                super(itemView);
-
-                amount = itemView.findViewById(R.id.editText2);
-                date = itemView.findViewById(R.id.editText3);
-                status = itemView.findViewById(R.id.textView14);
-
-            }
-        }
     }
 
 }

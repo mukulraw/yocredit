@@ -25,7 +25,7 @@ public interface AllApiIneterface {
 
     @Multipart
     @POST("yocredit/api/verify.php")
-    Call<loginBean> verify(
+    Call<updateBean> verify(
             @Part("phone") String client,
             @Part("otp") String otp
     );
@@ -85,6 +85,21 @@ public interface AllApiIneterface {
     Call<loanDetailsBean> getLoanDetails(
             @Part("user_id") String user_id,
             @Part("id") String id
+    );
+
+    @Multipart
+    @POST("yocredit/api/payEMI.php")
+    Call<updateBean> payEMI(
+            @Part("user_id") String user_id,
+            @Part("loan_id") String loan_id,
+            @Part("amount") String amount,
+            @Part MultipartBody.Part file3
+    );
+
+    @Multipart
+    @POST("yocredit/api/getLoans.php")
+    Call<statusBean> getLoans(
+            @Part("user_id") String user_id
     );
 
 }

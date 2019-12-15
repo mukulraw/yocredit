@@ -1,7 +1,13 @@
 package com.mrtecks.yocredit;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,18 +18,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.mrtecks.yocredit.loanDetailsPOJO.Data;
 import com.mrtecks.yocredit.loanDetailsPOJO.Emi;
 import com.mrtecks.yocredit.loanDetailsPOJO.loanDetailsBean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,9 +33,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class approved extends Fragment {
+public class LoanDetails extends AppCompatActivity {
 
-    TextView title , date;
+    Toolbar toolbar;
+    TextView title , date , status;
     EditText amount , interest , tenure , pamount , paid;
     RecyclerView emi;
     Button pay;
@@ -44,44 +46,52 @@ public class approved extends Fragment {
     EMIAdapter adapter;
     GridLayoutManager manager;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.approved , container , false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_loan_details);
 
-        id = getArguments().getString("id");
+
+        id = getIntent().getStringExtra("id");
         list = new ArrayList<>();
 
-        title = view.findViewById(R.id.title);
-        date = view.findViewById(R.id.date);
-        amount = view.findViewById(R.id.amount);
-        interest = view.findViewById(R.id.interest);
-        tenure = view.findViewById(R.id.tenure);
-        pamount = view.findViewById(R.id.pamount);
-        paid = view.findViewById(R.id.paid);
-        emi = view.findViewById(R.id.emis);
-        pay = view.findViewById(R.id.submit);
-        progress = view.findViewById(R.id.progress);
+        toolbar = findViewById(R.id.toolbar);
+        title = findViewById(R.id.title);
+        date = findViewById(R.id.date);
+        amount = findViewById(R.id.amount);
+        interest = findViewById(R.id.interest);
+        tenure = findViewById(R.id.tenure);
+        pamount = findViewById(R.id.pamount);
+        paid = findViewById(R.id.paid);
+        emi = findViewById(R.id.emis);
+        pay = findViewById(R.id.submit);
+        progress = findViewById(R.id.progress);
+        status = findViewById(R.id.status);
 
-        adapter = new EMIAdapter(getActivity() , list);
-        manager = new GridLayoutManager(getActivity() , 1);
+        setSupportActionBar(toolbar);
+
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+
+        toolbar.setNavigationIcon(R.drawable.arrowleft);
+        toolbar.setTitleTextColor(Color.WHITE);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        toolbar.setTitle("LOAN APPLICATION #" + id);
+
+        adapter = new EMIAdapter(this , list);
+        manager = new GridLayoutManager(this , 1);
 
         emi.setAdapter(adapter);
         emi.setLayoutManager(manager);
 
 
-        pay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent(getContext() , PayEMI.class);
-                intent.putExtra("id" , id);
-                startActivity(intent);
-
-            }
-        });
-
-        return view;
     }
 
     @Override
@@ -91,7 +101,7 @@ public class approved extends Fragment {
 
         progress.setVisibility(View.VISIBLE);
 
-        Bean b = (Bean) getActivity().getApplicationContext();
+        Bean b = (Bean) getApplicationContext();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(b.baseurl)
@@ -133,11 +143,30 @@ public class approved extends Fragment {
                     paid.setText(item.getPaid());
 
                     adapter.setData(item.getEmi());
+                    status.setText(item.getStatus());
+
+                    if (item.getStatus().equals("pending"))
+                    {
+                        status.setTextColor(getResources().getColor(R.color.colorAccent));
+                    }
+                    else if (item.getStatus().equals("approved"))
+                    {
+                        status.setTextColor(getResources().getColor(R.color.color_green));
+                    }
+                    else if (item.getStatus().equals("rejected"))
+                    {
+                        status.setTextColor(getResources().getColor(R.color.red));
+                    }
+                    else
+                    {
+                        status.setTextColor(getResources().getColor(R.color.color_green));
+                    }
+
 
                 }
                 else
                 {
-                    Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoanDetails.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
 

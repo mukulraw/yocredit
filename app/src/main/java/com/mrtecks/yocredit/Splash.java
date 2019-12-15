@@ -93,7 +93,7 @@ public class Splash extends AppCompatActivity {
     void startApp()
     {
         final String id = SharePreferenceUtils.getInstance().getString("id");
-        final String pan = SharePreferenceUtils.getInstance().getString("income");
+        final String pan = SharePreferenceUtils.getInstance().getString("pan");
 
         t = new Timer();
         t.schedule(new TimerTask() {

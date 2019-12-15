@@ -4,6 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Data {
+    @SerializedName("phone")
+    @Expose
+    private String phone;
     @SerializedName("user_id")
     @Expose
     private String userId;
@@ -212,5 +215,13 @@ public class Data {
 
     public void setPan(String pan) {
         this.pan = pan;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
