@@ -1,6 +1,7 @@
 package com.mrtecks.yocredit;
 
 
+import com.mrtecks.yocredit.loanDetailsPOJO.loanDetailsBean;
 import com.mrtecks.yocredit.statusPOJO.statusBean;
 import com.mrtecks.yocredit.updatePOJO.updateBean;
 
@@ -77,6 +78,13 @@ public interface AllApiIneterface {
             @Part("amount") String amount,
             @Part("interest") String interest,
             @Part("tenover") String tenover
+    );
+
+    @Multipart
+    @POST("yocredit/api/getLoanDetails.php")
+    Call<loanDetailsBean> getLoanDetails(
+            @Part("user_id") String user_id,
+            @Part("id") String id
     );
 
 }

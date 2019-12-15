@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="24dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#ffffff"
+        app:cardCornerRadius="5dp"
+        app:cardUseCompatPadding="true"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LOAN APPLICATION #01"
+            android:gravity="center"
+            android:id="@+id/title"
+            android:layout_marginStart="16dp"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/colorPrimary"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="APPLICATION DATE - 15 DEC 2019"
+            android:layout_gravity="start"
+            android:textSize="12sp"
+            android:id="@+id/date"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LOAN AMOUNT"
+            android:textColor="@color/white2"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
+            />
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:hint="tap to enter"
+            android:padding="10dp"
+            android:focusable="false"
+            android:clickable="false"
+            android:id="@+id/amount"
+            android:digits="0123456789"
+            android:inputType="number"
+            android:background="@drawable/blue_stroke_round2"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LOAN INTEREST"
+            android:textColor="@color/white2"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            />
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:padding="10dp"
+            android:id="@+id/interest"
+            android:text="0.0%"
+            android:focusable="false"
+            android:clickable="false"
+            android:inputType="textPersonName"
+            android:background="@drawable/blue_stroke_round2"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TENURE"
+            android:textColor="@color/white2"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            />
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:padding="10dp"
+            android:id="@+id/tenure"
+            android:focusable="false"
+            android:clickable="false"
+            android:inputType="textPersonName"
+            android:background="@drawable/blue_stroke_round2"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PAYABLE AMOUNT"
+            android:textColor="@color/white2"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            />
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:padding="10dp"
+            android:id="@+id/pamount"
+            android:focusable="false"
+            android:clickable="false"
+            android:inputType="textPersonName"
+            android:background="@drawable/blue_stroke_round2"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PAID"
+            android:textColor="@color/white2"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            />
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:padding="10dp"
+            android:id="@+id/paid"
+            android:focusable="false"
+            android:clickable="false"
+            android:inputType="textPersonName"
+            android:background="@drawable/blue_stroke_round2"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CURRENT STATUS"
+                android:textColor="@color/white2"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="APPROVED"
+                android:textColor="@color/color_green"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                />
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INSTALLMENTS"
+            android:gravity="center"
+            android:layout_marginStart="16dp"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/white"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            app:cardBackgroundColor="#ffffff"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="5dp"
+            android:layout_marginBottom="16dp"
+            app:cardUseCompatPadding="true"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/emis"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PAY INSTALLMENT/ FULL PAYMENT"
+                android:minWidth="0dp"
+                android:id="@+id/submit"
+                android:minHeight="0dp"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/accent_back_round"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>
