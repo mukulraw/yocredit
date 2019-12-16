@@ -149,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    android:text="ABC Bank"
+                    android:id="@+id/bank"
                     android:textColor="@color/white2" />
 
 
@@ -174,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    android:text="XYZ Branch"
+                    android:id="@+id/branch"
                     android:textColor="@color/white2" />
 
 
@@ -199,7 +199,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    android:text="154668746454654"
+                    android:id="@+id/account"
                     android:textColor="@color/white2" />
 
 
@@ -225,7 +225,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    android:text="ASDAS5464"
+                    android:id="@+id/ifsc"
                     android:textColor="@color/white2" />
 
 

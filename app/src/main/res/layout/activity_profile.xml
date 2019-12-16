@@ -49,7 +49,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Basic Details" />
+            android:id="@+id/phone"
+            android:drawableStart="@drawable/ic_call_answer"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:autoLink="phone" />
 
     </androidx.cardview.widget.CardView>
 
@@ -71,30 +75,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Personal Details" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:cardUseCompatPadding="true"
-        app:cardCornerRadius="5dp"
-        app:cardBackgroundColor="#ffffff"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Documents"
-            android:padding="10dp"
+            android:id="@+id/email"
+            android:drawableStart="@drawable/ic_envelope"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:autoLink="email"
             />
 
     </androidx.cardview.widget.CardView>
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

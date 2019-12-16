@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView menu, notification;
     DrawerLayout drawer;
     ProgressBar progress;
-    TextView loans , profile , logout;
+    TextView loans , profile , logout , terms , about;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         loans = findViewById(R.id.loans);
         profile = findViewById(R.id.profile);
         logout = findViewById(R.id.logout);
+        terms = findViewById(R.id.terms);
+        about = findViewById(R.id.about);
 
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +73,32 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this , Profile.class);
+                startActivity(intent);
+                drawer.closeDrawer(GravityCompat.START);
+
+            }
+        });
+
+        terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this , Web.class);
+                intent.putExtra("title" , "Terms & Conditions");
+                intent.putExtra("url" , "https://mrtecks.com/yocredit/terms.php");
+                startActivity(intent);
+                drawer.closeDrawer(GravityCompat.START);
+
+            }
+        });
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this , Web.class);
+                intent.putExtra("title" , "About Us");
+                intent.putExtra("url" , "https://mrtecks.com/yocredit/about.php");
                 startActivity(intent);
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -194,6 +222,17 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     // profile rejected
 
+                    FragmentManager fm = getSupportFragmentManager(); // or 'getSupportFragmentManager();'
+                    int count = fm.getBackStackEntryCount();
+                    for(int i = 0; i < count; ++i) {
+                        fm.popBackStack();
+                    }
+                    FragmentTransaction ft = fm.beginTransaction();
+                    profilereject test = new profilereject();
+                    ft.replace(R.id.replace, test);
+                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+                    //ft.addToBackStack(null);
+                    ft.commit();
                 }
 
                 progress.setVisibility(View.GONE);

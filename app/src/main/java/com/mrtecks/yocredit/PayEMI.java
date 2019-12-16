@@ -21,8 +21,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mrtecks.yocredit.contactPOJO.contactBean;
 import com.mrtecks.yocredit.updatePOJO.Data;
 import com.mrtecks.yocredit.updatePOJO.updateBean;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -54,6 +56,8 @@ public class PayEMI extends AppCompatActivity {
     Uri uri1;
     String id;
 
+    TextView bank , branch , account , ifsc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +71,10 @@ public class PayEMI extends AppCompatActivity {
         image = findViewById(R.id.pan_pic);
         progress = findViewById(R.id.progressBar);
         toolbar = findViewById(R.id.toolbar);
+        bank = findViewById(R.id.bank);
+        branch = findViewById(R.id.branch);
+        account = findViewById(R.id.account);
+        ifsc = findViewById(R.id.ifsc);
 
         setSupportActionBar(toolbar);
 
@@ -83,6 +91,38 @@ public class PayEMI extends AppCompatActivity {
 
         toolbar.setTitle("Pay EMI/ Full payment");
 
+        progress.setVisibility(View.VISIBLE);
+
+        Bean b = (Bean) getApplicationContext();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(b.baseurl)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
+
+        Call<contactBean> call = cr.getContact();
+
+        call.enqueue(new Callback<contactBean>() {
+            @Override
+            public void onResponse(Call<contactBean> call, Response<contactBean> response) {
+
+                bank.setText(response.body().getData().getBankName());
+                branch.setText(response.body().getData().getBankBranch());
+                account.setText(response.body().getData().getAccountNumber());
+                ifsc.setText(response.body().getData().getIfsc());
+
+                progress.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(Call<contactBean> call, Throwable t) {
+                progress.setVisibility(View.GONE);
+            }
+        });
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override

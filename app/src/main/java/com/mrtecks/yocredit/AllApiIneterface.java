@@ -1,6 +1,7 @@
 package com.mrtecks.yocredit;
 
 
+import com.mrtecks.yocredit.contactPOJO.contactBean;
 import com.mrtecks.yocredit.loanDetailsPOJO.loanDetailsBean;
 import com.mrtecks.yocredit.statusPOJO.statusBean;
 import com.mrtecks.yocredit.updatePOJO.updateBean;
@@ -101,5 +102,8 @@ public interface AllApiIneterface {
     Call<statusBean> getLoans(
             @Part("user_id") String user_id
     );
+
+    @GET("yocredit/api/getContact.php")
+    Call<contactBean> getContact();
 
 }
