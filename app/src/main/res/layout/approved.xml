@@ -69,7 +69,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:hint="tap to enter"
             android:padding="10dp"
             android:focusable="false"
             android:clickable="false"

@@ -179,7 +179,7 @@
                 android:hint="tap to enter"
                 android:padding="10dp"
                 android:id="@+id/income"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:background="@drawable/blue_stroke_round"
                 />
 

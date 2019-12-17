@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -16,9 +17,13 @@ import android.widget.Toast;
 
 import com.mrtecks.yocredit.updatePOJO.Data;
 import com.mrtecks.yocredit.updatePOJO.updateBean;
+import com.tsongkha.spinnerdatepicker.DatePickerDialog;
+import com.tsongkha.spinnerdatepicker.SpinnerDatePickerDialogBuilder;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -28,10 +33,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class Personal extends AppCompatActivity {
+public class Personal extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     Button submit;
     Toolbar toolbar;
-    EditText name , dob , father , mother , address , income , reference1 , reference2;
+    EditText name, dob, father, mother, address, income, reference1, reference2;
     ProgressBar progress;
 
     @Override
@@ -72,7 +77,31 @@ public class Personal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final Dialog dialog = new Dialog(Personal.this);
+                long now = System.currentTimeMillis() - 1000;
+
+                Calendar c = Calendar.getInstance();
+//Set time in milliseconds
+                c.setTimeInMillis(now);
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+                int hr = c.get(Calendar.HOUR);
+                int min = c.get(Calendar.MINUTE);
+                int sec = c.get(Calendar.SECOND);
+
+                new SpinnerDatePickerDialogBuilder()
+                        .context(Personal.this)
+                        .callback(Personal.this)
+                        .spinnerTheme(R.style.NumberPickerStyle)
+                        .showTitle(true)
+                        .showDaySpinner(true)
+                        .maxDate(mYear, mMonth, mDay)
+                        .defaultDate(mYear, mMonth, mDay)
+                        .build()
+                        .show();
+
+
+                /*final Dialog dialog = new Dialog(Personal.this);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setCancelable(true);
                 dialog.setContentView(R.layout.date_dialog);
@@ -104,7 +133,7 @@ public class Personal extends AppCompatActivity {
                         dialog.dismiss();
 
                     }
-                });
+                });*/
 
             }
         });
@@ -122,108 +151,98 @@ public class Personal extends AppCompatActivity {
                 String r1 = reference1.getText().toString();
                 String r2 = reference2.getText().toString();
 
-                if (n.length() > 0)
-                {
-                    if (d.length() > 0)
-                    {
-                        if (f.length() > 0)
-                        {
-                            if (m.length() > 0)
-                            {
-                                if (a.length() > 0)
-                                {
-                                    if (i.length() > 0)
-                                    {
+                int agg = getAge(d);
 
-                                        progress.setVisibility(View.VISIBLE);
+                Log.d("year", String.valueOf(agg));
 
-                                        Bean b = (Bean) getApplicationContext();
+                if (n.length() > 0) {
+                    if (d.length() > 0) {
 
-                                        Retrofit retrofit = new Retrofit.Builder()
-                                                .baseUrl(b.baseurl)
-                                                .addConverterFactory(ScalarsConverterFactory.create())
-                                                .addConverterFactory(GsonConverterFactory.create())
-                                                .build();
+                        if (agg >= 19) {
+                            if (f.length() > 0) {
+                                if (m.length() > 0) {
+                                    if (a.length() > 0) {
+                                        if (i.length() > 0) {
 
-                                        AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
+                                            progress.setVisibility(View.VISIBLE);
 
-                                        Call<updateBean> call = cr.update_personal(
-                                                SharePreferenceUtils.getInstance().getString("id") ,
-                                                n ,
-                                                d ,
-                                                f ,
-                                                m ,
-                                                a ,
-                                                i ,
-                                                r1 ,
-                                                r2
-                                        );
+                                            Bean b = (Bean) getApplicationContext();
+
+                                            Retrofit retrofit = new Retrofit.Builder()
+                                                    .baseUrl(b.baseurl)
+                                                    .addConverterFactory(ScalarsConverterFactory.create())
+                                                    .addConverterFactory(GsonConverterFactory.create())
+                                                    .build();
+
+                                            AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
+
+                                            Call<updateBean> call = cr.update_personal(
+                                                    SharePreferenceUtils.getInstance().getString("id"),
+                                                    n,
+                                                    d,
+                                                    f,
+                                                    m,
+                                                    a,
+                                                    i,
+                                                    r1,
+                                                    r2
+                                            );
 
 
-                                        call.enqueue(new Callback<updateBean>() {
-                                            @Override
-                                            public void onResponse(Call<updateBean> call, Response<updateBean> response) {
+                                            call.enqueue(new Callback<updateBean>() {
+                                                @Override
+                                                public void onResponse(Call<updateBean> call, Response<updateBean> response) {
 
-                                                if (response.body().getStatus().equals("1"))
-                                                {
-                                                    Data item = response.body().getData();
-                                                    SharePreferenceUtils.getInstance().saveString("name" , item.getName());
-                                                    SharePreferenceUtils.getInstance().saveString("dob" , item.getDob());
-                                                    SharePreferenceUtils.getInstance().saveString("father" , item.getFather());
-                                                    SharePreferenceUtils.getInstance().saveString("mother" , item.getMother());
-                                                    SharePreferenceUtils.getInstance().saveString("address" , item.getAddress());
+                                                    if (response.body().getStatus().equals("1")) {
+                                                        Data item = response.body().getData();
+                                                        SharePreferenceUtils.getInstance().saveString("name", item.getName());
+                                                        SharePreferenceUtils.getInstance().saveString("dob", item.getDob());
+                                                        SharePreferenceUtils.getInstance().saveString("father", item.getFather());
+                                                        SharePreferenceUtils.getInstance().saveString("mother", item.getMother());
+                                                        SharePreferenceUtils.getInstance().saveString("address", item.getAddress());
 
-                                                    SharePreferenceUtils.getInstance().saveString("reference1" , item.getReference1());
-                                                    SharePreferenceUtils.getInstance().saveString("reference2" , item.getReference2());
-                                                    Toast.makeText(Personal.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                                        SharePreferenceUtils.getInstance().saveString("reference1", item.getReference1());
+                                                        SharePreferenceUtils.getInstance().saveString("reference2", item.getReference2());
+                                                        Toast.makeText(Personal.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
-                                                    Intent intent = new Intent(Personal.this , Document.class);
-                                                    startActivity(intent);
-                                                    finish();
+                                                        Intent intent = new Intent(Personal.this, Document.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    } else {
+                                                        Toast.makeText(Personal.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+
+                                                    progress.setVisibility(View.GONE);
+
                                                 }
-                                                else
-                                                {
-                                                    Toast.makeText(Personal.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                                                @Override
+                                                public void onFailure(Call<updateBean> call, Throwable t) {
+                                                    progress.setVisibility(View.GONE);
                                                 }
+                                            });
 
-                                                progress.setVisibility(View.GONE);
-
-                                            }
-
-                                            @Override
-                                            public void onFailure(Call<updateBean> call, Throwable t) {
-                                                progress.setVisibility(View.GONE);
-                                            }
-                                        });
-
+                                        } else {
+                                            Toast.makeText(Personal.this, "Invalid income", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(Personal.this, "Invalid address", Toast.LENGTH_SHORT).show();
                                     }
-                                    else
-                                    {
-                                        Toast.makeText(Personal.this, "Invalid income", Toast.LENGTH_SHORT).show();
-                                    }
+                                } else {
+                                    Toast.makeText(Personal.this, "Invalid mother's name", Toast.LENGTH_SHORT).show();
                                 }
-                                else
-                                {
-                                    Toast.makeText(Personal.this, "Invalid address", Toast.LENGTH_SHORT).show();
-                                }
+                            } else {
+                                Toast.makeText(Personal.this, "Invalid father's name", Toast.LENGTH_SHORT).show();
                             }
-                            else
-                            {
-                                Toast.makeText(Personal.this, "Invalid mother's name", Toast.LENGTH_SHORT).show();
-                            }
+                        } else {
+                            Toast.makeText(Personal.this, "Age must be minimum 19 years", Toast.LENGTH_SHORT).show();
                         }
-                        else
-                        {
-                            Toast.makeText(Personal.this, "Invalid father's name", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    else
-                    {
+
+
+                    } else {
                         Toast.makeText(Personal.this, "Invalid D.O.B.", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else
-                {
+                } else {
                     Toast.makeText(Personal.this, "Invalid name", Toast.LENGTH_SHORT).show();
                 }
 
@@ -231,4 +250,50 @@ public class Personal extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onDateSet(com.tsongkha.spinnerdatepicker.DatePicker view, int year, int month, int day) {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MMM-YYYY");
+        String strDate = format.format(calendar.getTime());
+
+        dob.setText(strDate);
+
+    }
+
+    public static int getAge(String date) {
+
+        int age = 0;
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("dd-MMM-YYYY");
+            Date date1 = format.parse(date);
+            Calendar now = Calendar.getInstance();
+            Calendar dob = Calendar.getInstance();
+            dob.setTime(date1);
+            if (dob.after(now)) {
+                throw new IllegalArgumentException("Can't be born in the future");
+            }
+            int year1 = now.get(Calendar.YEAR);
+            int year2 = dob.get(Calendar.YEAR);
+            age = year1 - year2;
+            int month1 = now.get(Calendar.MONTH);
+            int month2 = dob.get(Calendar.MONTH);
+            if (month2 > month1) {
+                age--;
+            } else if (month1 == month2) {
+                int day1 = now.get(Calendar.DAY_OF_MONTH);
+                int day2 = dob.get(Calendar.DAY_OF_MONTH);
+                if (day2 > day1) {
+                    age--;
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return age;
+    }
+
 }
