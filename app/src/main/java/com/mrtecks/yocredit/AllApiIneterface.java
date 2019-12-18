@@ -6,6 +6,8 @@ import com.mrtecks.yocredit.loanDetailsPOJO.loanDetailsBean;
 import com.mrtecks.yocredit.statusPOJO.statusBean;
 import com.mrtecks.yocredit.updatePOJO.updateBean;
 
+import java.util.List;
+
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -105,5 +107,11 @@ public interface AllApiIneterface {
 
     @GET("yocredit/api/getContact.php")
     Call<contactBean> getContact();
+
+    @Multipart
+    @POST("yocredit/api/getNotification.php")
+    Call<List<notiBean>> getNoti(
+            @Part("id") String id
+    );
 
 }

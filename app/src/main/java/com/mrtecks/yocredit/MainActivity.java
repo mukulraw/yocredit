@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView menu, notification;
     DrawerLayout drawer;
     ProgressBar progress;
-    TextView loans , profile , logout , terms , about;
+    TextView loans , profile , logout , terms , about , name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
         logout = findViewById(R.id.logout);
         terms = findViewById(R.id.terms);
         about = findViewById(R.id.about);
+        name = findViewById(R.id.name);
+
+        name.setText(SharePreferenceUtils.getInstance().getString("name"));
 
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +70,17 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this , Loans.class);
                 startActivity(intent);
                 drawer.closeDrawer(GravityCompat.START);
+
+            }
+        });
+
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this , Notification.class);
+                startActivity(intent);
+                //drawer.closeDrawer(GravityCompat.START);
 
             }
         });
