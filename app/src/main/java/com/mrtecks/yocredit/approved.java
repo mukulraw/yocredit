@@ -3,6 +3,7 @@ package com.mrtecks.yocredit;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,6 +125,14 @@ public class approved extends Fragment {
 
                     float amm = Float.parseFloat(item.getAmount());
                     float inn = Float.parseFloat(item.getInterest());
+
+                    String[] spl = item.getTenover().split(" ");
+
+                    float inn1 = Float.parseFloat(spl[0]);
+
+                    inn = inn * inn1;
+
+                    Log.d("inn" , String.valueOf(inn));
 
                     float iam = (inn / 100) * amm;
 
