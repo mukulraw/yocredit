@@ -221,6 +221,19 @@ public class MainActivity extends AppCompatActivity {
                             //ft.addToBackStack(null);
                             ft.commit();
                         }
+                        else if (status.equals("accepted")) {
+                            // loan request rejected
+
+                            FragmentTransaction ft = fm.beginTransaction();
+                            accepted test = new accepted();
+                            Bundle b = new Bundle();
+                            b.putString("id" , response.body().getData().get(0).getId());
+                            test.setArguments(b);
+                            ft.replace(R.id.replace, test);
+                            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+                            //ft.addToBackStack(null);
+                            ft.commit();
+                        }
                         else {
                             // loan request approved
 
