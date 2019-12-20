@@ -171,6 +171,9 @@ public class apply extends Fragment {
                     if (aa > 999)
                     {
 
+                        submit.setEnabled(false);
+                        submit.setClickable(false);
+
 
                         progress.setVisibility(View.VISIBLE);
 
@@ -208,6 +211,10 @@ public class apply extends Fragment {
                             @Override
                             public void onFailure(Call<statusBean> call, Throwable t) {
                                 progress.setVisibility(View.GONE);
+
+                                submit.setEnabled(true);
+                                submit.setClickable(true);
+
                             }
                         });
 
