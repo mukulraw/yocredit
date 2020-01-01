@@ -3,14 +3,17 @@ package com.mrtecks.yocredit;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Steps extends AppCompatActivity {
     Button login;
-    TextView basic , personal , document , verification;
+    TextView basic , personal , document , verification , whatsapp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +24,33 @@ public class Steps extends AppCompatActivity {
         personal = findViewById(R.id.textView8);
         document = findViewById(R.id.textView9);
         verification = findViewById(R.id.textView10);
+        whatsapp = findViewById(R.id.textView16);
+
+        whatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                PackageManager pm=getPackageManager();
+                try {
+
+
+                    String toNumber = "917428122553"; // Replace with mobile phone number without +Sign or leading zeros, but with country code.
+                    //Suppose your country is India and your phone number is “xxxxxxxxxx”, then you need to send “91xxxxxxxxxx”.
+
+
+
+                    Intent sendIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + "" + toNumber + "?body=" + ""));
+            sendIntent.setPackage("com.whatsapp");
+            startActivity(sendIntent);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(Steps.this,"it may be you dont have whats app",Toast.LENGTH_LONG).show();
+
+        }
+
+            }
+        });
 
         if (SharePreferenceUtils.getInstance().getString("pin").length() > 0)
         {
