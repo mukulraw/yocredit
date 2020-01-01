@@ -20,21 +20,21 @@ import retrofit2.http.Part;
 public interface AllApiIneterface {
 
     @Multipart
-    @POST("yocredit/api/login.php")
+    @POST("api/login.php")
     Call<loginBean> login(
             @Part("phone") String client,
             @Part("token") String token
     );
 
     @Multipart
-    @POST("yocredit/api/verify.php")
+    @POST("api/verify.php")
     Call<updateBean> verify(
             @Part("phone") String client,
             @Part("otp") String otp
     );
 
     @Multipart
-    @POST("yocredit/api/update_basic.php")
+    @POST("api/update_basic.php")
     Call<updateBean> update_basic(
             @Part("user_id") String user_id,
             @Part("name") String name,
@@ -43,7 +43,7 @@ public interface AllApiIneterface {
     );
 
     @Multipart
-    @POST("yocredit/api/update_personal.php")
+    @POST("api/update_personal.php")
     Call<updateBean> update_personal(
             @Part("user_id") String user_id,
             @Part("name") String name,
@@ -57,7 +57,7 @@ public interface AllApiIneterface {
     );
 
     @Multipart
-    @POST("yocredit/api/update_document.php")
+    @POST("api/update_document.php")
     Call<updateBean> update_document(
             @Part("user_id") String user_id,
             @Part("amount") String amount,
@@ -69,13 +69,13 @@ public interface AllApiIneterface {
     );
 
     @Multipart
-    @POST("yocredit/api/getStatus.php")
+    @POST("api/getStatus.php")
     Call<statusBean> getStatus(
             @Part("user_id") String user_id
     );
 
     @Multipart
-    @POST("yocredit/api/applyLoan.php")
+    @POST("api/applyLoan.php")
     Call<statusBean> applyLoan(
             @Part("user_id") String user_id,
             @Part("amount") String amount,
@@ -84,14 +84,14 @@ public interface AllApiIneterface {
     );
 
     @Multipart
-    @POST("yocredit/api/getLoanDetails.php")
+    @POST("api/getLoanDetails.php")
     Call<loanDetailsBean> getLoanDetails(
             @Part("user_id") String user_id,
             @Part("id") String id
     );
 
     @Multipart
-    @POST("yocredit/api/payEMI.php")
+    @POST("api/payEMI.php")
     Call<updateBean> payEMI(
             @Part("user_id") String user_id,
             @Part("loan_id") String loan_id,
@@ -100,16 +100,16 @@ public interface AllApiIneterface {
     );
 
     @Multipart
-    @POST("yocredit/api/getLoans.php")
+    @POST("api/getLoans.php")
     Call<statusBean> getLoans(
             @Part("user_id") String user_id
     );
 
-    @GET("yocredit/api/getContact.php")
+    @GET("api/getContact.php")
     Call<contactBean> getContact();
 
     @Multipart
-    @POST("yocredit/api/getNotification.php")
+    @POST("api/getNotification.php")
     Call<List<notiBean>> getNoti(
             @Part("id") String id
     );

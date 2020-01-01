@@ -81,6 +81,7 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<loginBean> call, Throwable t) {
                             progress.setVisibility(View.GONE);
+                            t.printStackTrace();
                         }
                     });
 

@@ -9,7 +9,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 public class Bean extends Application {
     private static Context context;
 
-    public String baseurl = "https://mrtecks.com/";
+    public String baseurl = "http://ec2-15-206-41-150.ap-south-1.compute.amazonaws.com/";
 
 
     public static Context getContext() {
