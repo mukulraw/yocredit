@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mrtecks.yocredit">
+    package="com.mrtecks.yocreditapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name=".Bean"
+        android:name="com.mrtecks.yocreditapp.Bean"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,27 +17,27 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Notification"></activity>
-        <activity android:name=".Web" />
-        <activity android:name=".Profile" />
-        <activity android:name=".LoanDetails" />
-        <activity android:name=".Loans" />
-        <activity android:name=".PayEMI" />
-        <activity android:name=".Status" />
-        <activity android:name=".Document" />
-        <activity android:name=".Personal" />
-        <activity android:name=".Basic" />
-        <activity android:name=".Steps" />
-        <activity android:name=".OTP" />
-        <activity android:name=".Login" />
-        <activity android:name=".Splash">
+        <activity android:name="com.mrtecks.yocreditapp.Notification"></activity>
+        <activity android:name="com.mrtecks.yocreditapp.Web" />
+        <activity android:name="com.mrtecks.yocreditapp.Profile" />
+        <activity android:name="com.mrtecks.yocreditapp.LoanDetails" />
+        <activity android:name="com.mrtecks.yocreditapp.Loans" />
+        <activity android:name="com.mrtecks.yocreditapp.PayEMI" />
+        <activity android:name="com.mrtecks.yocreditapp.Status" />
+        <activity android:name="com.mrtecks.yocreditapp.Document" />
+        <activity android:name="com.mrtecks.yocreditapp.Personal" />
+        <activity android:name="com.mrtecks.yocreditapp.Basic" />
+        <activity android:name="com.mrtecks.yocreditapp.Steps" />
+        <activity android:name="com.mrtecks.yocreditapp.OTP" />
+        <activity android:name="com.mrtecks.yocreditapp.Login" />
+        <activity android:name="com.mrtecks.yocreditapp.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name="com.mrtecks.yocreditapp.MainActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -67,7 +67,7 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
 
-        <service android:name=".MyFirebaseMessagingService">
+        <service android:name="com.mrtecks.yocreditapp.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
